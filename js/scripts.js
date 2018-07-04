@@ -2,7 +2,7 @@ let form = document.getElementById("sorting");
 let filter = document.getElementById("filter");
 
 var ourRequest = new XMLHttpRequest();
-ourRequest.open('GET', 'https://learnwebcode.github.io/json-example/pets-data.json');
+ourRequest.open('GET', 'https://testytestytestytesty.github.io/jsonData/pets.json');
 ourRequest.onload = function() {
     var data = JSON.parse(ourRequest.responseText);
     form.addEventListener("change", sorting);
@@ -12,16 +12,16 @@ ourRequest.onload = function() {
 
     function filtering() {
         if (filter.value === 'cats') {
-            let cats = data.pets.filter(el =>{
+            const cats = JSON.parse(JSON.stringify(data));
+            console.log(cats.pets);
+            let x = cats.pets.filter(el =>{
                 return (el.species == "Cat");
             });
-            console.log(cats);
             createHTML(cats);
         }else if(filter.value === 'dogs') {
             let dogs = data.pets.filter(el =>{
                 return (el.species == "Dog");
             });
-            console.log(dogs);
             createHTML(dogs);
         }
         if (filter.value === 'default') {
