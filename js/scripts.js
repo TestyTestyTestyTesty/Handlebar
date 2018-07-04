@@ -37,6 +37,10 @@ ourRequest.onload = function() {
             //sort by years DESC
             data.pets.sort((a, b) => parseFloat(a.birthYear) - parseFloat(b.birthYear));
             createHTML(data);
+        }else if(form.value === 'byNameASC') {
+            //sort by years DESC
+            data.pets.name.sort();
+            createHTML(data);
         }
     }
 };
