@@ -13,15 +13,17 @@ ourRequest.onload = function() {
     function filtering() {
         if (filter.value === 'cats') {
             const cats = JSON.parse(JSON.stringify(data));
-            console.log(cats.pets);
-            let x = cats.pets.filter(el =>{
+            let pets = cats.pets.filter(el =>{
                 return (el.species == "Cat");
             });
+            cats.pets = pets;
             createHTML(cats);
         }else if(filter.value === 'dogs') {
-            let dogs = data.pets.filter(el =>{
+            const dogs = JSON.parse(JSON.stringify(data));
+            let pets = dogs.pets.filter(el =>{
                 return (el.species == "Dog");
             });
+            dogs.pets = pets;
             createHTML(dogs);
         }
         if (filter.value === 'default') {
@@ -31,15 +33,15 @@ ourRequest.onload = function() {
     }
     function sorting() {
         if (form.value === 'byYearsASC') {
-            data.pets.sort((a, b) => parseFloat(b.birthYear) - parseFloat(a.birthYear));
+            data.pets.sort((a, b) => (b.birthYear) - (a.birthYear));
             createHTML(data);
         }else if(form.value === 'byYearsDESC') {
             //sort by years DESC
-            data.pets.sort((a, b) => parseFloat(a.birthYear) - parseFloat(b.birthYear));
+            data.pets.sort((a, b) => (a.birthYear) - (b.birthYear));
             createHTML(data);
         }else if(form.value === 'byNameASC') {
             //sort by years DESC
-            data.pets.name.sort();
+            console.log(data.pets);
             createHTML(data);
         }
     }
