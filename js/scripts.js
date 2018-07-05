@@ -5,6 +5,8 @@ var ourRequest = new XMLHttpRequest();
 ourRequest.open('GET', 'https://testytestytestytesty.github.io/jsonData/pets.json');
 ourRequest.onload = function() {
     var data = JSON.parse(ourRequest.responseText);
+    const cats = JSON.parse(JSON.stringify(data));
+    const dogs = JSON.parse(JSON.stringify(data));
     form.addEventListener("change", sorting);
     filter.addEventListener("change", filtering);
     data.pets.sort((a, b) => parseFloat(b.birthYear) - parseFloat(a.birthYear));
@@ -12,14 +14,13 @@ ourRequest.onload = function() {
 
     function filtering() {
         if (filter.value === 'cats') {
-            const cats = JSON.parse(JSON.stringify(data));
             let pets = cats.pets.filter(el =>{
                 return (el.species == "Cat");
             });
             cats.pets = pets;
             createHTML(cats);
         }else if(filter.value === 'dogs') {
-            const dogs = JSON.parse(JSON.stringify(data));
+
             let pets = dogs.pets.filter(el =>{
                 return (el.species == "Dog");
             });
@@ -40,7 +41,11 @@ ourRequest.onload = function() {
             createHTML(data);
         }else if(form.value === 'byNameASC') {
             //sort by years DESC
-            console.log(data.pets);
+            data.pets.sort((a,b) => (a.name) > (b.name));
+            createHTML(data);
+        }else if(form.value === 'byNameDESC') {
+            //sort by years DESC
+            data.pets.sort((a,b) => (a.name) < (b.name));
             createHTML(data);
         }
     }
