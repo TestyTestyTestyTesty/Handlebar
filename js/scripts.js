@@ -27,7 +27,6 @@ ourRequest.onload = function() {
             createHTML(dogs);
         }
         if (filter.value === 'default') {
-            console.log(data);
             createHTML(data);
         }
     }
